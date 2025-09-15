@@ -1,0 +1,13 @@
+<section class="booking">
+  <h2>Property #{{ propertyId }}</h2>
+
+  <form (ngSubmit)="confirmBooking()">
+    <label>Check-in Date</label>
+    <input type="date" [(ngModel)]="checkIn" name="checkIn" required />
+
+    <label>Check-out Date</label>
+    <input type="date" [(ngModel)]="checkOut" name="checkOut" required />
+
+    <button type="submit" class="btn-primary">Confirm Booking</button>
+  </form>
+</section>

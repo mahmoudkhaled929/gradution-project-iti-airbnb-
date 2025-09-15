@@ -1,0 +1,62 @@
+<header class="navbar">
+  <div class="logo">Airbnb</div>
+  <nav>
+    <a href="#">discover</a>
+    <a href="#">offers</a>
+    <a href="#">prices</a>
+    <a href="#">conection</a>
+  </nav>
+  <button class="theme-toggle" (click)="toggleTheme()">
+    {{ theme === 'light' ? '' : '' }}
+  </button>
+</header>
+
+<section class="hero">
+  <h1>Find your perfect property</h1>
+  <form class="search" (ngSubmit)="onSearch()">
+    <input
+      type="text"
+      placeholder="Destination"
+      [(ngModel)]="searchPayload.location"
+      name="location"
+      required
+    />
+    <input
+      type="date"
+      [(ngModel)]="searchPayload.checkIn"
+      name="checkIn"
+      required
+    />
+    <input
+      type="date"
+      [(ngModel)]="searchPayload.checkOut"
+      name="checkOut"
+      required
+    />
+    <button type="submit">search</button>
+  </form>
+</section>
+
+<section class="cards">
+  <article class="card" *ngFor="let c of cards">
+    <div class="img">
+      <img [src]="c.image" [alt]="c.title" />
+      <button class="fav" (click)="addToFav(c)">❤</button>
+    </div>
+    <div class="body">
+      <h3>{{ c.title }}</h3>
+      <p>{{ c.city }}</p>
+      <div class="details">
+        <span>⭐ {{ c.rating }}</span>
+        <span>${{ c.price }}/night</span>
+        <div class="card-actions">
+          <button class="btn-primary" (click)="goToBooking(c)">Book</button>
+        </div>
+      </div> 
+    </div> 
+  </article>
+</section>
+
+<footer>
+  © {{ currentYear }} StayHub All rights reserved
+</footer>

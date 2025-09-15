@@ -1,0 +1,42 @@
+<section class="booking-container" *ngIf="property">
+  <h2>📌 {{ property.title }}</h2>
+
+  <!-- صورة العقار -->
+  <div class="property-image">
+    <img [src]="property.image" [alt]="property.title" />
+  </div>
+
+  <!-- تفاصيل العقار -->
+  <div class="property-details">
+    <p><strong>المدينة:</strong> {{ property.city || 'غير محدد' }}</p>
+    <p><strong>السعر لليلة:</strong> ${{ property.price }}</p>
+    <p><strong>التقييم:</strong> ⭐ {{ property.rating || 'N/A' }}</p>
+  </div>
+
+  <!-- فورم التواريخ -->
+  <form (ngSubmit)="submitReservation()" class="booking-form">
+    <label>
+      Check-in:
+      <input type="date" [(ngModel)]="checkIn" name="checkIn" (change)="calcNights()" required />
+    </label>
+
+    <label>
+      Check-out:
+      <input type="date" [(ngModel)]="checkOut" name="checkOut" (change)="calcNights()" required />
+    </label>
+
+    <!-- ملخص الحساب -->
+    <div class="summary" *ngIf="nights > 0">
+      <p>عدد الليالي: {{ nights }}</p>
+      <p>المجموع الكلي: ${{ total }}</p>
+    </div>
+
+    <!-- زرار التأكيد -->
+    <button type="submit" class="btn-confirm">Confirm Reservation</button>
+  </form>
+</section>
+
+<!-- في حالة عدم وجود Property -->
+<section *ngIf="!property">
+  <p>❌ No property found!</p>
+</section>
